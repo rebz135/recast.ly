@@ -19,8 +19,9 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
-      videoObj: props.videos[0]
+      videoObj: exampleVideoData[0]
     }
   }
   
@@ -32,7 +33,7 @@ class App extends React.Component {
     return (<div>
     <nav className="navbar">
       <div className="col-md-6 offset-md-3">
-        <div><h5><em>search</em> view goes here</h5></div>
+        <div><Search /></div>
       </div>
     </nav>
     <div className="row">
@@ -40,7 +41,7 @@ class App extends React.Component {
         <VideoPlayer video={this.state.videoObj} />
       </div>
       <div className="col-md-5">
-        <VideoList videos={this.props.videos} state={this.changeVideo.bind(this)} />
+        <VideoList videos={exampleVideoData} state={this.changeVideo.bind(this)} />
       </div>
     </div>
   </div>)
