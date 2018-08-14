@@ -16,40 +16,67 @@
 //   </div>
 // );
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       videoObj: exampleVideoData[0],
+      videos: exampleVideoData,
     }
-    this.props.searchYouTube(null, this.initData.bind(this));
   }
   
   initData(data) {
     this.changeVideo(data[0]);
+    this.setState({videos: data})
+  }
+  
+  componentDidMount() {
+    this.props.searchYouTube(null, this.initData.bind(this));
   }
   
   changeVideo(video) {
     this.setState({videoObj: video});
   }
   
+  setSearchState(data) {
+    this.setState({
+      videos: data,
+      videoObj: data[0]
+    })
+  }
+  
+  searchVideo(event) {
+    var options = {
+      query: event.target.value,
+    }
+    this.props.searchYouTube(options, this.setSearchState.bind(this));
+  }
+  
+  // debounceSearch(event) {
+  //   // console.log(_.debounce(this.searchVideo.bind(this, event), 500))
+  //   console.log('event', event);
+  //   _.debounce(this.searchVideo.bind(this, event), 500)();
+  // }
+  
   render() {
     return (
-    <div>
-      <nav className="navbar">
-        <div className="col-md-6 offset-md-3">
-          <div><Search /></div>
-        </div>
-      </nav>
-      <div className="row">
-        <div className="col-md-7">
-          <VideoPlayer video={this.state.videoObj} />
-        </div>
-        <div className="col-md-5">
-          <VideoList videos={exampleVideoData} state={this.changeVideo.bind(this)} />
+      <div>
+        <nav className="navbar">
+          <div className="col-md-6 offset-md-3">
+            <div><Search searchVideo={this.searchVideo.bind(this)}/></div>
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <VideoPlayer video={this.state.videoObj} />
+          </div>
+          <div className="col-md-5">
+            <VideoList videos={this.state.videos} changeState={this.changeVideo.bind(this)} />
+          </div>
         </div>
       </div>
-    </div>);
+    );
   }
 }
 

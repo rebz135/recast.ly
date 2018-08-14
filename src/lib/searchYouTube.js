@@ -1,7 +1,7 @@
 var searchYouTube = (options, callback) => {
   options = options || {
     'key': YOUTUBE_API_KEY,
-    'max': 3,
+    'max': 5,
     'q': 'kittens'
   }
   let params = {
@@ -18,7 +18,6 @@ var searchYouTube = (options, callback) => {
     data: params,
     timeout: 2000,
     success: function(data) {
-      console.log(data);
       callback(data.items);
     },
     error: function(data) {

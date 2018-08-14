@@ -12,7 +12,7 @@
 
 var VideoListEntry = (props) => {
   var clickFunc = () => {
-    props.state(props.video);
+    props.changeState(props.video);
   }
   return (
   <div className="video-list-entry media">
