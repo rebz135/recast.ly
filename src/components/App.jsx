@@ -50,7 +50,10 @@ class App extends React.Component {
     var options = {
       query: event.target.value,
     }
-    this.props.searchYouTube(options, this.setSearchState.bind(this));
+    var search = function () {
+      this.props.searchYouTube(options, this.setSearchState.bind(this));
+    };
+    _.debounce(search.bind(this), 500)();
   }
   
   // debounceSearch(event) {

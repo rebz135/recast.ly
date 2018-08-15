@@ -34,7 +34,10 @@ describe ('Search', function() {
 
       var searchInputElement = findRenderedDOMComponentWithClass(app, 'form-control');
       Simulate.change(searchInputElement, {target: {value: 'React tutorial'}});
-
+      
+      // We are invoking the debounced function after 500ms
+      // This specific test is looking for immediate invokation after change
+      // We are failing this test for this reason
       var newVideoEntryTitleElements = scryRenderedDOMComponentsWithClass(app, 'video-list-entry-title');
       newVideoEntryTitleElements.forEach((videoEntryTitle, i) => {
         expect(videoEntryTitle.innerHTML).to.equal(moreFakeVideoData[i].snippet.title);
