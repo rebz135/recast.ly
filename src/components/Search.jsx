@@ -1,13 +1,3 @@
-// var Search = (props) => (
-//   <div className="search-bar form-inline">
-//     <input className="form-control" type="text" />
-//     <button className="btn hidden-sm-down">
-//       <span className="glyphicon glyphicon-search"></span>
-//     </button>
-//   </div> 
-// );
-
-
 var Search = (props) => (
   <form className="search-bar form-inline">
     <input type="text" onChange={props.searchVideo} className="form-control" />
